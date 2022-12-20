@@ -3,6 +3,8 @@ SYAK:同步 SiYuan 内容块到 Anki, 自动更新, 自动删除
 > 如果觉得有帮助, 麻烦点个 Star⭐
 >
 
+⚠**初次使用请提前备份Anki, 以免数据误删!**
+
 # Prerequisite
 
 1. Anki 需要安装 AnkiConnect 插件, code 为 `2055492159`​​​​, 默认端口 `8765`​​​​
