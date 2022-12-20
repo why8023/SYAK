@@ -5,9 +5,9 @@ SYAK:同步 SiYuan 内容块到 Anki, 自动更新, 自动删除
 
 # Prerequisite
 
-1. Anki 需要安装 AnkiConnect 插件, code 为 `2055492159`​​, 默认端口 `8765`​​
+1. Anki 需要安装 AnkiConnect 插件, code 为 `2055492159`​​​​, 默认端口 `8765`​​​​
 2. 支持 Python 3.9 以上版本
-3. SiYuan 默认端口为 `6806`​​
+3. SiYuan 默认端口为 `6806`​​​​
 4. 同步时, 保持 SiYuan 和 Anki 同时运行
 
 # Install
@@ -25,7 +25,7 @@ pip install syak
 5. 运行命令 `syak -p SiYuan数据根路径(data目录的上一级)`​ ​即可同步
 6. 查看更多选项运行 `syak -h`​​
 
-# DEMO
+# Demo
 
 ​![demo](demo.gif)​
 
@@ -45,8 +45,24 @@ pip install syak
 2. 代码块高亮
 3. 超级块未适配
 
-# MORE
+# More
 
-使用带有定时运行脚本功能的软件,如 [Keyboard Maestro](https://www.keyboardmaestro.com/main/) 或者 [Quicker](https://getquicker.net/) 实现后台无缝同步
+1. 使用带有定时运行脚本功能的软件,如 [Keyboard Maestro](https://www.keyboardmaestro.com/main/) 或者 [Quicker](https://getquicker.net/) 实现后台无缝同步
+2. macOS 用户如果遇到同步耗时较长的问题, 可以参考:
+
+   1. [FooSoft Productions - Anki-Connect](https://foosoft.net/projects/anki-connect/)
+
+      > Starting with [Mac OS X Mavericks](https://en.wikipedia.org/wiki/OS_X_Mavericks), a feature named *App Nap* has been introduced to the operating system. This feature causes certain applications which are open (but not visible) to be placed in a suspended state. As this behavior causes Anki-Connect to stop working while you have another window in the foreground, App Nap should be disabled for Anki:
+      >
+      > 1. Start the Terminal application.
+      > 2. Execute the following commands in the terminal window:
+      >
+      >    ```
+      >    defaults write net.ankiweb.dtop NSAppSleepDisabled -bool true
+      >    defaults write net.ichi2.anki NSAppSleepDisabled -bool true
+      >    defaults write org.qt-project.Qt.QtWebEngineCore NSAppSleepDisabled -bool true
+      >    ```
+      > 3. Restart Anki.
+      >
 
 ‍
