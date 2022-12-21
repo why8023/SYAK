@@ -44,12 +44,12 @@ pip install syak
 # Not Support (currently)
 
 1. Close
-2. 代码块高亮
+2. 代码块语法高亮
 3. 超级块未适配
 
 # More
 
-1. 使用带有定时运行脚本功能的软件,如 [Keyboard Maestro](https://www.keyboardmaestro.com/main/) 或者 [Quicker](https://getquicker.net/) 实现后台无缝同步
+1. 使用带有定时运行脚本功能的软件,如 [Keyboard Maestro](https://www.keyboardmaestro.com/main/) 或者 [Quicker](https://getquicker.net/) 实现后台无感同步
 2. macOS 用户如果遇到同步耗时较长的问题, 可以参考:
 
    1. [FooSoft Productions - Anki-Connect](https://foosoft.net/projects/anki-connect/)
