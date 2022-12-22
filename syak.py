@@ -1,16 +1,18 @@
 import argparse
-import re
-from pathlib import Path
-import sys
-import requests
-import pandas as pd
-import sqlite3
-import logging
-import time
-import markdown2 as mk2
-import psutil
 import functools
+import logging
+import re
+import sqlite3
+import sys
+import time
+from pathlib import Path
 from typing import Iterable
+
+import markdown2 as mk2
+import pandas as pd
+import psutil
+import requests
+import schedule
 
 markdown = lambda x: mk2.markdown(
     x, extras=["fenced-code-blocks", "code-friendly", "tables", "cuddled-lists"]
@@ -606,6 +608,7 @@ def main():
         dest="SiYuan_data_path",
         required=True,
     )
+    parser.add_argument("-i", "--interval", help="interval of sync(seconds)", default=None, type=int)
     parser.add_argument("--SiYuanPort", help="port of SiYuan", default=6806)
     parser.add_argument("--ANKIPort", help="port of Anki", default=8765)
     parser.add_argument(
@@ -617,7 +620,13 @@ def main():
         logging.error("SiYuan path does not exists.")
         exit()
     syak = SYAK(args.SiYuan_data_path, args.SiYuanPort, args.ANKIPort, args.Anki_model)
-    syak.run()
+    if args.interval:
+        schedule.every(args.interval).seconds.do(syak.run)
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
+    else:
+        syak.run()
     print("\n".join(syak.summary))
 
 

@@ -3,7 +3,7 @@ SYAK:同步 SiYuan 内容块到 Anki, 自动更新, 自动删除
 > 如果觉得有帮助, 麻烦点个 Star⭐
 >
 
-⚠**初次使用请提前备份Anki, 以免数据误删!**
+⚠ **初次使用请提前备份 Anki, 以免数据误删!**
 
 # Prerequisite
 
@@ -15,17 +15,22 @@ SYAK:同步 SiYuan 内容块到 Anki, 自动更新, 自动删除
 # Install
 
 ```
-pip install syak
+pip install -U syak
 ```
 
 # Usage
 
-1. 新建一个 `card`​ ​文档块, 名字支持前后缀, 例如 `@card`​​
-2. 在需要制卡的内容块后面引用 `card`​ ​文档块
+1. 新建一个 `card`​​ ​文档块, 名字支持前后缀, 例如 `@card`​​​
+2. 在需要制卡的内容块后面引用 `card`​​ ​文档块
 3. 制卡内容块为某个容器块下的叶子块时, 卡片正面为制卡内容块, 背面为整个容器块
-4. 制卡内容块为文档块下的叶子块时, 卡片正面制卡内容块, 背面为空
-5. 运行命令 `syak -p SiYuan数据根路径(data目录的上一级)`​ ​即可同步
-6. 查看更多选项运行 `syak -h`​​
+4. 制卡内容块为文档块下的叶子块时, 卡片正面为制卡内容块, 背面为空
+5. 运行命令 `syak -p SiYuan数据根路径(data目录的上一级)`​​ ​即可同步
+6. 运行周期任务 `syak -p SiYuan数据根路径(data目录的上一级) -i (seconds)`​, 例如每 5 分钟运行一次 `syak -p SiYuan数据根路径(data目录的上一级) -i 300`​
+7. 后台运行
+
+   1. Linux&macOS `nohup syak -p SiYuan数据根路径(data目录的上一级) -i (seconds) &`​
+   2. Windows `start /b syak -p SiYuan数据根路径(data目录的上一级) -i (seconds)`​
+8. 查看更多选项运行 `syak -h`​​​
 
 # Demo
 
@@ -49,8 +54,7 @@ pip install syak
 
 # More
 
-1. 使用带有定时运行脚本功能的软件,如 [Keyboard Maestro](https://www.keyboardmaestro.com/main/) 或者 [Quicker](https://getquicker.net/) 实现后台无感同步
-2. macOS 用户如果遇到同步耗时较长的问题, 可以参考:
+1. macOS 用户如果遇到同步耗时较长的问题, 可以参考:
 
    1. [FooSoft Productions - Anki-Connect](https://foosoft.net/projects/anki-connect/)
 
