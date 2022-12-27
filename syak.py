@@ -303,7 +303,7 @@ class SYAK:
         # todo merge series process
         create["front"] = (
             create["markdown"]
-            .str.replace("\n\n", "\n")  # remove empty line
+            # .str.replace("\n\n", "\n")  # remove empty line
             .str.replace(self._assets_regex, "", regex=True)
             .str.replace(self._ial_regex, " ", regex=True)
             .str.replace(
@@ -330,7 +330,7 @@ class SYAK:
         )
         create["back"] = (
             create["parent_markdown"]
-            .str.replace("\n\n", "\n")  # remove empty line
+            # .str.replace("\n\n", "\n")  # remove empty line
             .str.replace(self._assets_regex, "", regex=True)
             .str.replace(self._ial_regex, " ", regex=True)
             .str.replace(
@@ -372,7 +372,7 @@ class SYAK:
     def update_notes(self, n):
         n["front"] = (
             n["markdown"]
-            .str.replace("\n\n", "\n")  # remove empty line
+            # .str.replace("\n\n", "\n")  # remove empty line
             .str.replace(self._assets_regex, "", regex=True)
             .str.replace(self._ial_regex, " ", regex=True)
             .str.replace(
@@ -399,7 +399,7 @@ class SYAK:
         )
         n["back"] = (
             n["parent_markdown"]
-            .str.replace("\n\n", "\n")  # remove empty line
+            # .str.replace("\n\n", "\n")  # remove empty line
             .str.replace(self._assets_regex, "", regex=True)
             .str.replace(self._ial_regex, " ", regex=True)
             .str.replace(
