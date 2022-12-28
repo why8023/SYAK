@@ -492,7 +492,7 @@ class SYAK:
         pass
 
     @log
-    def run(self):
+    def run(self, custom_deck=None):
         if not self.check_procs():
             logging.warning("Anki/SiYuan not running!")
             return
@@ -527,7 +527,11 @@ class SYAK:
         sql = f"select * from blocks where id in {block_ids}"
         blocks = pd.read_sql(sql, self.con)
         blocks = blocks.merge(sy_notebook, how="left", on="box")
-        blocks["deck"] = (blocks["boxName"] + blocks["hpath"]).str.replace("/", "::")
+        blocks["deck"] = (blocks["boxName"] + blocks["hpath"])
+        if custom_deck is not None:
+            custom_deck = custom_deck.strip("/")
+            blocks.loc[blocks['deck'].str.startswith(custom_deck), "deck"] = custom_deck
+        blocks['deck'] = blocks['deck'].str.replace("/", "::")
 
         exists = self.anki_notes(self._Anki_MODEL)
         delete = exists[~exists["id"].isin(blocks["id"])]
@@ -614,6 +618,7 @@ def main():
     parser.add_argument(
         "--model", help="model of Anki", default="SiYuanModel", dest="Anki_model"
     )
+    parser.add_argument("--custom_deck", help="custom deck name", default=None)
     args = parser.parse_args()
     path = Path(args.SiYuan_data_path)
     if not path.exists() or not path.is_dir():
@@ -621,12 +626,12 @@ def main():
         exit()
     syak = SYAK(args.SiYuan_data_path, args.SiYuanPort, args.ANKIPort, args.Anki_model)
     if args.interval:
-        schedule.every(args.interval).seconds.do(syak.run)
+        schedule.every(args.interval).seconds.do(syak.run, custom_deck=args.custom_deck)
         while True:
             schedule.run_pending()
             time.sleep(1)
     else:
-        syak.run()
+        syak.run(args.custom_deck)
     print("\n".join(syak.summary))
 
 
