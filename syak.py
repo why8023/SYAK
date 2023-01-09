@@ -47,7 +47,7 @@ class SYAK:
         self._SiYuan_URL = f"http://localhost:{SiYuan_Port}"
         self._Anki_URL = f"http://localhost:{Anki_Port}"
         self._Anki_MODEL = Anki_Model
-        self.modle_fields = [
+        self.model_fields = [
             "front",
             "back",
             "id",
@@ -61,7 +61,7 @@ class SYAK:
         ]
         self._Anki_MODEL_CONFIG = {
             "modelName": self._Anki_MODEL,
-            "inOrderFields": self.modle_fields,
+            "inOrderFields": self.model_fields,
             "cardTemplates": [
                 {
                     "Front": "{{front}}",
@@ -289,6 +289,8 @@ class SYAK:
             axis=1,
         )
         blocks = blocks.merge(parent, "left", on="parent_id")
+        blocks["URL_id"] = blocks['parent_id'].copy()
+        blocks.loc[blocks['parent_hash'].isna(), 'URL_id'] = blocks['id']
         blocks.fillna(
             {
                 "parent_markdown": "",
@@ -323,7 +325,8 @@ class SYAK:
                 regex=True,
             )
             + '<p><a href="siyuan://blocks/'
-            + create["id"]
+            + create["URL_id"]
+            + "?focus=1"
             + '">'
             + "SiYuanURL"
             + "</a></p>"
@@ -350,7 +353,7 @@ class SYAK:
                 regex=True,
             )
         )
-        notes = create[self.modle_fields].to_dict(orient="records")
+        notes = create[self.model_fields].to_dict(orient="records")
         notes = list(
             map(
                 lambda x: {
@@ -392,7 +395,8 @@ class SYAK:
                 regex=True,
             )
             + '<p><a href="siyuan://blocks/'
-            + n["id"]
+            + n["URL_id"]
+            + "?focus=1"
             + '">'
             + "SiYuanURL"
             + "</a></p>"
@@ -419,7 +423,7 @@ class SYAK:
                 regex=True,
             )
         )
-        update_note_fields_json = n[self.modle_fields + ["note_id"]].to_dict(
+        update_note_fields_json = n[self.model_fields + ["note_id"]].to_dict(
             orient="records"
         )
 
